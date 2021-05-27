@@ -9,7 +9,8 @@
   "scripts": {
     "prepare": "rm -rf ./lib && tsc",
     "build": "rm -rf ./lib && tsc",
-    "build-test": "rm -rf ./lib && tsc -m CommonJS"
+    "build-test": "rm -rf ./lib && tsc -m CommonJS",
+    "publish-public": "npm init --scope=@sumocreations && npm publish --access public"
   },
   "eslintConfig": {
     "extends": "react-app"
