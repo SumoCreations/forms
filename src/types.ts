@@ -77,3 +77,16 @@ export interface FormProps<T> extends FormConfigurationProps {
   defaultValues?: T;
   onSubmit: AsyncSubmitHandler<T>;
 }
+
+/**
+ * Error output commonly used on our graphql APIs.
+ */
+export interface ValidationError {
+  message: string;
+  path: string;
+}
+
+/**
+ * A list of errors returned from our graphQL APIs.
+ */
+export type ErrorList = ValidationError[];

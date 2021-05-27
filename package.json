@@ -34,7 +34,10 @@
     "prettier": "^2.1.2",
     "typescript": "^4.0.5"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/yup": "^0.29.11",
+    "yup": "^0.32.9"
+  },
   "description": "A shared library containing a mix of utility or helper functions.",
   "directories": {
     "lib": "lib"
