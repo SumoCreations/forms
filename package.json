@@ -1,15 +1,34 @@
 {
   "name": "@sumocreations/forms",
-  "version": "1.0.1",
-  "types": "./lib/index.d.ts",
+  "version": "1.0.2",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.mjs",
+  "umd:main": "dist/index.umd.js",
+  "unpkg": "dist/index.umd.js",
+  "jsdelivr": "dist/index.umd.js",
+  "jsnext:main": "dist/index.esm.mjs",
+  "source": "src/index.ts",
+  "types": "dist/index.d.ts",
   "files": [
-    "lib"
+    "dist",
+    "dist/__tests__"
   ],
-  "main": "lib/index.js",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/index.esm.mjs",
+      "require": "./dist/index.cjs.js"
+    }
+  },
   "scripts": {
-    "prepare": "rm -rf ./lib && tsc",
-    "build": "rm -rf ./lib && tsc",
-    "build-test": "rm -rf ./lib && tsc -m CommonJS",
+    "clean": "rimraf dist",
+    "prebuild": "yarn clean",
+    "build": "yarn build:modern",
+    "postbuild": "rimraf dist/__tests__ && node ./scripts/rollup/assert-esm-exports.mjs && node ./scripts/rollup/assert-cjs-exports.cjs",
+    "build:modern": "rollup -c ./scripts/rollup/rollup.config.js",
+    "build:esm": "rollup -c ./scripts/rollup/rollup.esm.config.js",
+    "prepublishOnly": "yarn && yarn type && yarn build",
+    "type": "tsc --noEmit",
     "publish-public": "npm init --scope=@sumocreations && npm publish --access public"
   },
   "eslintConfig": {
@@ -28,14 +47,23 @@
     ]
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.2",
+    "@rollup/plugin-node-resolve": "^13.1.3",
     "@types/node": "12.6.8",
     "@types/react": "16.8.23",
     "jest": "26.6.0",
     "prettier": "^2.1.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.66.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-sourcemaps": "^0.6.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.31.1",
     "typescript": "^4.0.5"
   },
   "dependencies": {
     "@types/yup": "^0.29.11",
+    "react": "^17.0.2",
     "yup": "^0.32.9"
   },
   "description": "A shared library containing a mix of utility or helper functions.",
