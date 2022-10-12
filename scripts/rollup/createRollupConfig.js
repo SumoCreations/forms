@@ -18,7 +18,7 @@ export function createRollupConfig(options, callback) {
       format: options.format,
       name: "@sumocreations/forms",
       sourcemap: true,
-      globals: { react: "React" },
+      globals: { react: "React", yup: "Yup" },
       exports: "named",
     },
     plugins: [
